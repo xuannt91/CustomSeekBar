@@ -120,22 +120,22 @@ public class DynamicSeekBarView extends LinearLayout implements SeekBar.OnSeekBa
                     tvInfo.setTextColor(getColorValue(infoTextColor));
                 }
 
-                if (infoBackgroundColor != 0) {
-                    GradientDrawable shape = new GradientDrawable();
-                    shape.setShape(GradientDrawable.RECTANGLE);
-                    if (infoRadius != 0)
-                        shape.setCornerRadius(infoRadius);
-                    shape.setColor(getColorValue(infoBackgroundColor));
-                    tvInfo.setBackground(shape);
-                } else {
-                    GradientDrawable shape = new GradientDrawable();
-                    shape.setShape(GradientDrawable.RECTANGLE);
-                    if (infoRadius != 0)
-                        shape.setCornerRadius(infoRadius);
-                    shape.setColor(getColorValue(R.color.default_color));
-                    tvInfo.setBackground(shape);
-
-                }
+//                if (infoBackgroundColor != 0) {
+//                    GradientDrawable shape = new GradientDrawable();
+//                    shape.setShape(GradientDrawable.RECTANGLE);
+//                    if (infoRadius != 0)
+//                        shape.setCornerRadius(infoRadius);
+//                    shape.setColor(getColorValue(infoBackgroundColor));
+//                    tvInfo.setBackground(shape);
+//                } else {
+//                    GradientDrawable shape = new GradientDrawable();
+//                    shape.setShape(GradientDrawable.RECTANGLE);
+//                    if (infoRadius != 0)
+//                        shape.setCornerRadius(infoRadius);
+//                    shape.setColor(getColorValue(R.color.default_color));
+//                    tvInfo.setBackground(shape);
+//
+//                }
 
 
                 new Handler().postDelayed(new Runnable() {
