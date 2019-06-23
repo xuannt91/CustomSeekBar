@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -26,12 +27,12 @@ import vn.nms.dynamic_seekbar.R;
  * @since 11/3/2017.
  */
 
-public class DynamicSeekBarView extends LinearLayout implements SeekBar.OnSeekBarChangeListener {
+public class DynamicSeekBarView extends LinearLayout implements SeekBar.OnSeekBarChangeListener, View.OnTouchListener {
     private CustomSeekBar seekBar;
-    private View arrow;
     private TextView tvInfo;
     private LinearLayout llInfo;
     private String seekBarTextInfo = "";
+    private boolean isEnable = false;
 
     public DynamicSeekBarView(Context context) {
         super(context);
@@ -52,10 +53,10 @@ public class DynamicSeekBarView extends LinearLayout implements SeekBar.OnSeekBa
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.dynamic_seek_bar_view, this, false);
         seekBar = view.findViewById(R.id.seekBar);
-        arrow = view.findViewById(R.id.arrow);
         tvInfo = view.findViewById(R.id.tvInfo);
         llInfo = view.findViewById(R.id.llInfo);
         seekBar.setOnSeekBarChangeListener(this);
+        seekBar.setOnTouchListener(this);
         tvInfo.setText("" + seekBar.getProgress());
 
         if (attrs != null) {
@@ -76,16 +77,16 @@ public class DynamicSeekBarView extends LinearLayout implements SeekBar.OnSeekBa
             boolean isHideInfo = a.getBoolean(R.styleable.DynamicSeekBarView_dsbv_isHideInfo, false);
             String initInfoString = a.getString(R.styleable.DynamicSeekBarView_dsbv_infoInitText);
 
-            if(thumbDrawable!=0) {
+            if (thumbDrawable != 0) {
                 seekBar.setThumb(thumbDrawable, thumbSize);
             }
 
 
             PorterDuff.Mode mMode = PorterDuff.Mode.SRC_ATOP;
 
-            if(progressDrawable!=0){
+            if (progressDrawable != 0) {
                 seekBar.setProgressDrawable(getResources().getDrawable(progressDrawable));
-            }else {
+            } else {
                 LayerDrawable layerDrawable = (LayerDrawable) seekBar.getProgressDrawable();
                 if (progressColor != 0) {
                     Drawable progress = layerDrawable.findDrawableByLayerId(android.R.id.progress);
@@ -126,16 +127,14 @@ public class DynamicSeekBarView extends LinearLayout implements SeekBar.OnSeekBa
                         shape.setCornerRadius(infoRadius);
                     shape.setColor(getColorValue(infoBackgroundColor));
                     tvInfo.setBackground(shape);
-                    arrow.getBackground().setColorFilter(getColorValue(infoBackgroundColor), mMode);
-                }else{
+                } else {
                     GradientDrawable shape = new GradientDrawable();
                     shape.setShape(GradientDrawable.RECTANGLE);
                     if (infoRadius != 0)
                         shape.setCornerRadius(infoRadius);
                     shape.setColor(getColorValue(R.color.default_color));
                     tvInfo.setBackground(shape);
-                    arrow.getBackground().setColorFilter(
-                            getColorValue(R.color.default_color), mMode);
+
                 }
 
 
@@ -160,13 +159,24 @@ public class DynamicSeekBarView extends LinearLayout implements SeekBar.OnSeekBa
         this.addView(view);
     }
 
-    public void setProgress(int value){
+    public void setProgress(int value) {
         seekBar.setProgress(value);
 
     }
 
+    public void setProgressDrawable(int drawable) {
+        seekBar.setProgressDrawable(getResources().getDrawable(drawable));
+    }
 
-    public void setMax(int max){
+    public void setThumbDrawable(int thumb) {
+        seekBar.setThumbDrawable(thumb);
+    }
+
+    public void setDisable(boolean enable) {
+        this.isEnable = enable;
+    }
+
+    public void setMax(int max) {
         seekBar.setMax(max);
     }
 
@@ -183,7 +193,6 @@ public class DynamicSeekBarView extends LinearLayout implements SeekBar.OnSeekBa
     private void setInfoPosition(int progress) {
         int value = getStepValue(progress);
         seekBar.setProgress(value);
-        arrow.setX(getSeekBarThumbPosX(seekBar) - arrow.getWidth() / 2);
         tvInfo.setX(getTimePosition(seekBar, tvInfo));
     }
 
@@ -227,5 +236,10 @@ public class DynamicSeekBarView extends LinearLayout implements SeekBar.OnSeekBa
     public void setInfoText(String text, int progress) {
         tvInfo.setText(text);
         setInfoPosition(progress);
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return isEnable;
     }
 }

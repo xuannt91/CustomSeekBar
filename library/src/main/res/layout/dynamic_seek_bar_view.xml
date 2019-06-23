@@ -28,15 +28,6 @@
             android:text=""
             android:textColor="@android:color/white"
             android:textStyle="bold"/>
-
-        <View
-            android:id="@+id/arrow"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_marginBottom="-4dp"
-            android:background="@drawable/triangle_shape"
-            android:rotation="180"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -50,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:max="10"
+                android:minWidth="6dp"
                 android:progress="5"
                 android:splitTrack="false"
                 dms:dms_progressDrawable="@drawable/progress_drawable_default"

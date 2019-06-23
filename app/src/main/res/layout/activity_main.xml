@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
@@ -14,34 +13,38 @@
         android:id="@+id/dynamicSeekbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:dsbv_progressColor="@color/yellow"
-        app:dsbv_progressBackgroundColor="@color/gray_bold"
-        app:dsbv_infoTextSize="12dp"
-        app:dsbv_infoTextColor="@android:color/white"
         app:dsbv_infoBackgroundColor="@color/yellow"
+        app:dsbv_infoInitText="@string/init_info_text"
         app:dsbv_infoRadius="30"
+        app:dsbv_infoTextColor="@android:color/white"
+        app:dsbv_infoTextSize="12dp"
         app:dsbv_max="100"
         app:dsbv_progress="50"
-        app:dsbv_thumbDrawable="@drawable/ic_sun"
-        app:dsbv_infoInitText="@string/init_info_text"/>
+        app:dsbv_progressBackgroundColor="@color/gray_bold"
+        app:dsbv_progressColor="@color/yellow"
+        app:dsbv_thumbDrawable="@drawable/ic_sun" />
 
     <vn.nms.dynamic_seekbar.DynamicSeekBarView
         android:id="@+id/defaultSeekbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:dsbv_infoBackgroundColor="@android:color/transparent"
+        app:dsbv_infoTextColor="@android:color/black"
         app:dsbv_max="100"
-        app:dsbv_progress="50"
-        android:layout_marginTop="20dp"/>
+        app:dsbv_progressDrawable="@drawable/seekbar_progress_appearance"
+        app:dsbv_thumbDrawable="@drawable/seekbar_oval_shape"
+        app:dsbv_progress="50" />
 
     <vn.nms.dynamic_seekbar.DynamicSeekBarView
         android:id="@+id/defaultSeekbarLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        app:dsbv_isHideInfo="true"
         app:dsbv_max="100"
         app:dsbv_progress="50"
-        app:dsbv_isHideInfo="true"
-        app:dsbv_thumbDrawable="@drawable/seekbar_thumb"
-        app:dsbv_progressDrawable="@drawable/progress_drawable_large"/>
+        app:dsbv_progressDrawable="@drawable/seekbar_progress_appearance"
+        app:dsbv_thumbDrawable="@drawable/seekbar_oval_shape" />
 
 </LinearLayout>
