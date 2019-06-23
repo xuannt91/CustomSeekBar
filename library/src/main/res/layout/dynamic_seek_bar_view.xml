@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:max="10"
-                android:minWidth="6dp"
+                android:maxHeight="6dp"
                 android:progress="5"
                 android:splitTrack="false"
                 dms:dms_progressDrawable="@drawable/progress_drawable_default"
